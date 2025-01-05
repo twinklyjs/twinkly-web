@@ -1,4 +1,4 @@
-import {api} from '@twinklyjs/twinkly';
+import { api } from '@twinklyjs/twinkly';
 import { useEffect, useState } from 'react';
 import viteLogo from '/vite.svg';
 import reactLogo from './assets/react.svg';
