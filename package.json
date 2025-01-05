@@ -1,0 +1,23 @@
+{
+  "name": "twinkly-web",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "./client",
+    "./server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace client\" \"npm run dev --workspace server\"",
+    "build": "npm run build --workspaces",
+    "fix": "biome check --write .",
+    "lint": "biome check ."
+  },
+  "keywords": [],
+  "author": "Justin Beckwith <justin.beckwith@gmail.com>",
+  "license": "MIT",
+  "description": "A web dashboard for controlling those Twinkly lights",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "concurrently": "^9.1.2"
+  }
+}

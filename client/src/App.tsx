@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import {api} from '@twinklyjs/twinkly';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      api.init('localhost:3000', {additionalHeaders: { 'x-twinkly-ip': '10.0.0.167' }});
+      const res = await api.echo({message: 'Hello World!'});
+      console.log(res);
+    })();
+  }, []);
 
   return (
     <>
