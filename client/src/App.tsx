@@ -1,4 +1,4 @@
-import { api } from '@twinklyjs/twinkly';
+import { TwinklyClient } from '@twinklyjs/twinkly';
 import { useEffect, useState } from 'react';
 import viteLogo from '/vite.svg';
 import reactLogo from './assets/react.svg';
@@ -10,10 +10,11 @@ function App() {
 
 	useEffect(() => {
 		(async () => {
-			api.init('localhost:3000', {
-				additionalHeaders: { 'x-twinkly-ip': '10.0.0.167' },
+			const client = new TwinklyClient({
+				ip: 'localhost:3000',
+				additionalHeaders: { 'x-twinkly-ip': '10.0.0.103' },
 			});
-			const res = await api.getSummary();
+			const res = await client.getSummary();
 			setSummary(JSON.stringify(res, null, 2));
 		})();
 	}, []);
