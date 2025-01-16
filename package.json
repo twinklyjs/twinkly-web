@@ -19,5 +19,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "@uiw/react-color-wheel": "^2.3.4"
   }
 }
