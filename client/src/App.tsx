@@ -17,7 +17,7 @@ function App() {
 
 	useEffect(() => {
 		(async () => {
-			await client.setLEDOperationMode({mode: LEDOperationMode.COLOR});
+			await client.setLEDOperationMode({ mode: LEDOperationMode.COLOR });
 			const res = await client.getSummary();
 			setSummary(JSON.stringify(res, null, 2));
 		})();
