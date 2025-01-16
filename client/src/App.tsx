@@ -1,33 +1,52 @@
-import { TwinklyClient } from '@twinklyjs/twinkly';
+import { LEDOperationMode, TwinklyClient } from '@twinklyjs/twinkly';
 import { useEffect, useState } from 'react';
-import viteLogo from '/vite.svg';
-import reactLogo from './assets/react.svg';
 import './App.css';
+import type { ColorResult } from '@uiw/color-convert';
+import Wheel from '@uiw/react-color-wheel';
+
+const client = new TwinklyClient({
+	ip: 'localhost:3000',
+	additionalHeaders: { 'x-twinkly-ip': '10.0.0.103' },
+});
 
 function App() {
 	const [count, setCount] = useState(0);
 	const [summary, setSummary] = useState('');
+	const [hsva, setHsva] = useState({ h: 214, s: 43, v: 90, a: 1 });
+	const [isUpdating, setIsUpdating] = useState(false);
 
 	useEffect(() => {
 		(async () => {
-			const client = new TwinklyClient({
-				ip: 'localhost:3000',
-				additionalHeaders: { 'x-twinkly-ip': '10.0.0.103' },
-			});
+			await client.setLEDOperationMode({ mode: LEDOperationMode.COLOR });
 			const res = await client.getSummary();
 			setSummary(JSON.stringify(res, null, 2));
 		})();
 	}, []);
 
+	const onChange = (color: ColorResult) => {
+		if (isUpdating) return;
+		setIsUpdating(true);
+		console.log('color', color.rgb);
+		setHsva({ ...hsva, ...color.hsva });
+		(async () => {
+			try {
+				await client.setLEDColor({
+					red: color.rgb.r,
+					green: color.rgb.g,
+					blue: color.rgb.b,
+				});
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setIsUpdating(false);
+			}
+		})();
+	};
+
 	return (
 		<>
 			<div>
-				<a href="https://vite.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
+				<Wheel color={hsva} onChange={onChange} />
 			</div>
 			<h1>Twinklyjs ON THE WEB</h1>
 			<div className="card">
