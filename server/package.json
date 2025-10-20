@@ -19,6 +19,6 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "node-datachannel": "^0.24.0"
+    "node-datachannel": "^0.30.0"
   }
 }
