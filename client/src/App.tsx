@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import type { ColorResult } from '@uiw/color-convert';
 import Wheel from '@uiw/react-color-wheel';
+import AudioVisualizer from './AudioVisualizer';
 
 const client = new TwinklyClient({
 	ip: 'localhost:3000',
-	additionalHeaders: { 'x-twinkly-ip': '10.0.0.103' },
+	additionalHeaders: { 'x-twinkly-ip': '10.0.0.185' },
 });
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
+			<AudioVisualizer client={client} />
 		</>
 	);
 }
