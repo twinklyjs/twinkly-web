@@ -3,6 +3,9 @@
  */
 
 import http from 'node:http';
+import webrtc from 'node-datachannel';
+
+webrtc.initLogger('Debug');
 
 const corsHeaders = {
 	'Access-Control-Allow-Origin': '*',

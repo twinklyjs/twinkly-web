@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@twinklyjs/twinkly": "^0.0.6",
+    "@uiw/react-color-wheel": "^2.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
